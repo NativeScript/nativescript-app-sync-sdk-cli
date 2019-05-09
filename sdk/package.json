@@ -1,6 +1,6 @@
 {
   "name": "nativescript-code-push-sdk",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Management SDK for the CodePush service",
   "main": "script/index.js",
   "scripts": {
@@ -10,7 +10,10 @@
     "type": "git",
     "url": "https://github.com/EddyVerbruggen/code-push.git"
   },
-  "author": "Microsoft Corporation",
+  "author": {
+    "name": "Eddy Verbruggen",
+    "email": "eddyverbruggen@gmail.com"
+  },
   "license": "MIT",
   "homepage": "https://github.com/EddyVerbruggen/code-push",
   "dependencies": {
