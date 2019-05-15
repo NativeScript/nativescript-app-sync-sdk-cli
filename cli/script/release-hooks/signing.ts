@@ -1,5 +1,4 @@
 import * as cli from "../../definitions/cli";
-import * as crypto from "crypto";
 import * as fs from "fs";
 import * as hashUtils from "../hash-utils";
 import * as jwt from "jsonwebtoken";
@@ -7,7 +6,7 @@ import * as os from "os";
 import * as path from "path";
 import * as q from "q";
 var rimraf = require("rimraf");
-import AccountManager = require("code-push");
+import AccountManager = require("nativescript-code-push-sdk");
 
 var CURRENT_CLAIM_VERSION: string = "1.0.0";
 var METADATA_FILE_NAME: string = ".codepushrelease";

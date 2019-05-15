@@ -1,6 +1,6 @@
-﻿/// <reference path="../../definitions/generated/code-push.d.ts" />
+﻿/// <reference path="../../definitions/nativescript-code-push-sdk.d.ts" />
 
-import AccountManager = require("code-push");
+import AccountManager = require("nativescript-code-push-sdk");
 import * as chalk from "chalk";
 var childProcess = require("child_process");
 import debugCommand from "./commands/debug";
@@ -27,7 +27,7 @@ import wordwrap = require("wordwrap");
 import { CommonUtils } from "./common-utils";
 import * as cli from "../definitions/cli";
 import hooks from "./release-hooks/index";
-import { AccessKey, Account, App, CodePushError, CollaboratorMap, CollaboratorProperties, Deployment, DeploymentMetrics, Headers, Package, PackageInfo, Session, UpdateMetrics } from "code-push/script/types";
+import { AccessKey, Account, App, CodePushError, CollaboratorMap, CollaboratorProperties, Deployment, DeploymentMetrics, Headers, Package, PackageInfo, Session, UpdateMetrics } from "nativescript-code-push-sdk/script/types";
 
 var configFilePath: string = path.join(process.env.LOCALAPPDATA || process.env.HOME, ".code-push.config");
 var emailValidator = require("email-validator");
@@ -488,7 +488,7 @@ export function execute(command: cli.ICommand): Promise<void> {
                     if (!!sdk) break; // Used by unit tests to skip authentication
 
                     if (!connectionInfo) {
-                        throw new Error("You are not currently logged in. Run the 'code-push login' command to authenticate with the CodePush server.");
+                        throw new Error("You are not currently logged in. Run the 'nativescript-code-push login' command to authenticate with the CodePush server.");
                     }
 
                     sdk = getSdk(connectionInfo.accessKey, CLI_HEADERS, connectionInfo.customServerUrl, connectionInfo.proxy);
@@ -1564,7 +1564,7 @@ function validateDeployment(appName: string, deploymentName: string): Promise<vo
         .catch((err: any) => {
             // If we get an error that the deployment doesn't exist (but not the app doesn't exist), then tack on a more descriptive error message telling the user what to do
             if (err.statusCode === AccountManager.ERROR_NOT_FOUND && err.message.indexOf("Deployment") !== -1) {
-                err.message = err.message + "\nUse \"code-push deployment list\" to view any existing deployments and \"code-push deployment add\" to add deployment(s) to the app.";
+                err.message = err.message + "\nUse \"nativescript-code-push deployment list\" to view any existing deployments and \"nativescript-code-push deployment add\" to add deployment(s) to the app.";
             }
             throw err;
         });
@@ -1665,7 +1665,7 @@ function serializeConnectionInfo(accessKey: string, preserveAccessKeyOnLogout: b
     var json: string = JSON.stringify(connectionInfo);
     fs.writeFileSync(configFilePath, json, { encoding: "utf8" });
 
-    log(`\r\nSuccessfully logged-in. Your session file was written to ${chalk.cyan(configFilePath)}. You can run the ${chalk.cyan("code-push logout")} command at any time to delete this file and terminate your session.\r\n`);
+    log(`\r\nSuccessfully logged-in. Your session file was written to ${chalk.cyan(configFilePath)}. You can run the ${chalk.cyan("nativescript-code-push logout")} command at any time to delete this file and terminate your session.\r\n`);
 }
 
 function sessionList(command: cli.ISessionListCommand): Promise<void> {
@@ -1679,7 +1679,7 @@ function sessionList(command: cli.ISessionListCommand): Promise<void> {
 
 function sessionRemove(command: cli.ISessionRemoveCommand): Promise<void> {
     if (os.hostname() === command.machineName) {
-        throw new Error("Cannot remove the current login session via this command. Please run 'code-push logout' instead.");
+        throw new Error("Cannot remove the current login session via this command. Please run 'nativescript-code-push logout' instead.");
     } else {
         return confirm()
             .then((wasConfirmed: boolean): Promise<void> => {

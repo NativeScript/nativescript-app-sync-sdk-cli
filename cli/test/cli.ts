@@ -3,7 +3,7 @@ import * as sinon from "sinon";
 import Q = require("q");
 import * as path from "path";
 import Promise = Q.Promise;
-import * as codePush from "code-push/script/types";
+import * as codePush from "nativescript-code-push-sdk/script/types";
 import * as cli from "../definitions/cli";
 import * as cmdexec from "../script/command-executor";
 import * as os from "os";
@@ -135,7 +135,7 @@ export class SdkStub {
         if (appName === "a") {
             return Q([this.productionDeployment, this.stagingDeployment]);
         }
-    
+
         return Q.reject<codePush.Deployment[]>();
     }
 

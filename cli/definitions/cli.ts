@@ -1,5 +1,5 @@
-﻿/// <reference path="../../definitions/generated/code-push.d.ts" />
-import AccountManager = require("code-push");
+﻿/// <reference path="../../definitions/nativescript-code-push-sdk.d.ts" />
+import AccountManager = require("nativescript-code-push-sdk");
 
 export enum CommandType {
     accessKeyAdd,
