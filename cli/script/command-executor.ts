@@ -12,24 +12,18 @@ var opener = require("opener");
 import * as os from "os";
 import * as path from "path";
 var plist = require("plist");
-var progress = require("progress");
 var prompt = require("prompt");
 import * as Q from "q";
-import * as recursiveFs from "recursive-fs";
 var rimraf = require("rimraf");
 import * as semver from "semver";
-var simctl = require("simctl");
-import slash = require("slash");
 var Table = require("cli-table");
-import * as yazl from "yazl";
 var which = require("which");
 import wordwrap = require("wordwrap");
-import { CommonUtils } from "./common-utils";
 import * as cli from "../definitions/cli";
 import hooks from "./release-hooks/index";
 import { AccessKey, Account, App, CodePushError, CollaboratorMap, CollaboratorProperties, Deployment, DeploymentMetrics, Headers, Package, PackageInfo, Session, UpdateMetrics } from "nativescript-code-push-sdk/script/types";
 
-var configFilePath: string = path.join(process.env.LOCALAPPDATA || process.env.HOME, ".code-push.config");
+var configFilePath: string = path.join(process.env.LOCALAPPDATA || process.env.HOME, ".nativescript-code-push.config");
 var emailValidator = require("email-validator");
 var packageJson = require("../package.json");
 var parseXml = Q.denodeify(require("xml2js").parseString);
@@ -623,7 +617,7 @@ function initiateExternalAuthenticationAsync(action: string, serverUrl?: string)
     var message: string;
 
     if (action === "link") {
-        message = `Please login to Mobile Center in the browser window we've just opened.\nIf you login with an additional authentication provider (e.g. GitHub) that shares the same email address, it will be linked to your current Mobile Center account.`;
+        message = `Please login to the browser window we've just opened.\nIf you login with an additional authentication provider (e.g. GitHub) that shares the same email address, it will be linked to your current Mobile Center account.`;
 
         // For "link" there shouldn't be a token prompt, so we go straight to the Mobile Center URL to avoid that
         log(message);
@@ -632,7 +626,7 @@ function initiateExternalAuthenticationAsync(action: string, serverUrl?: string)
     }
     else {
         // We use this now for both login & register
-        message = `Please login to Mobile Center in the browser window we've just opened.`;
+        message = `Please login to the browser window we've just opened.`;
 
         log(message);
         var hostname: string = os.hostname();

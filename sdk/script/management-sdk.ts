@@ -44,8 +44,8 @@ class AccountManager {
         OWNER: "Owner",
         COLLABORATOR: "Collaborator"
     };
-    public static SERVER_URL = "https://codepush-management.azurewebsites.net";
-    public static MOBILE_CENTER_SERVER_URL = "https://mobile.azure.com";
+    public static SERVER_URL = "https://nativescript-codepush-server.herokuapp.com";
+    public static MOBILE_CENTER_SERVER_URL = "https://nativescript-codepush-server.herokuapp.com";
 
     private static API_VERSION: number = 2;
 
