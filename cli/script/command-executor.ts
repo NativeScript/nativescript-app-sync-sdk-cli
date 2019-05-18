@@ -1467,7 +1467,7 @@ export var releaseNativeScript = (command: cli.IReleaseNativeScriptCommand): Pro
             try {
                 projectPackageJson = require(path.join(process.cwd(), "package.json"));
             } catch (error) {
-                throw new Error("Unable to find or read \"package.json\" in the CWD. The \"release-nativescript\" command must be executed in a NativeScript project folder.");
+                throw new Error("Unable to find or read \"package.json\" in the CWD. The \"release\" command must be executed in a NativeScript project folder.");
             }
 
             if (!projectPackageJson.nativescript) {

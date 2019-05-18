@@ -1,12 +1,4 @@
-# CodePush
-
-> This "fork" is compatible with NativeScript
-
-CodePush is a cloud service that enables Cordova, React Native and NativeScript developers to deploy mobile app updates directly to their users' devices.
-It works by acting as a central repository that developers can publish updates to (JS, HTML, CSS and images),
-and that apps can query for updates from (using provided client SDKs for [Cordova](https://github.com/Microsoft/cordova-plugin-code-push), [React Native](https://github.com/Microsoft/react-native-code-push) and [NativeScript](https://github.com/EddyVerbruggen/nativescript-code-push)).
-
-This allows you to have a more deterministic and direct engagement model with your userbase, when addressing bugs and/or adding small features that don't require you to re-build a binary and re-distribute it through the respective app stores.
+# NativeScript CodePush
 
 This repo includes the [management CLI](/cli) and [Node.js management SDK](/sdk), which allows you to manage and automate the needs of your apps.
 To get started using CodePush for NativeScript, refer to our [CodePush plugin docs](https://github.com/EddyVerbruggen/nativescript-code-push),
@@ -47,11 +39,3 @@ npm publish
 To run all tests, run `gulp test` script from the root of the project.
 
 To test just one of the projects (e.g. cli or sdk), run `gulp test-cli` or `gulp test-sdk`
-
-### Coding Conventions
-
-* Use double quotes for strings
-* Use four space tabs
-* Use `camelCase` for local variables and imported modules, `PascalCase` for types, and `dash-case` for file names
-
-This project has adopted the [Microsoft Open Source Code of Conduct](https://opensource.microsoft.com/codeofconduct/). For more information see the [Code of Conduct FAQ](https://opensource.microsoft.com/codeofconduct/faq/) or contact [opencode@microsoft.com](mailto:opencode@microsoft.com) with any additional questions or comments.

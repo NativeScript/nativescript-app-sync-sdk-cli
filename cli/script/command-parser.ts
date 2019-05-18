@@ -22,9 +22,8 @@ export function showHelp(showRootDescription?: boolean): void {
             console.log(chalk.cyan(" / ___/__  ___/ /__" + chalk.green(" / _ \\__ _____ / / ")));
             console.log(chalk.cyan("/ /__/ _ \\/ _  / -_)" + chalk.green(" ___/ // (_-</ _ \\")));
             console.log(chalk.cyan("\\___/\\___/\\_,_/\\__/" + chalk.green("_/   \\_,_/___/_//_/")) + "    CLI v" + packageJson.version);
-            console.log(chalk.cyan("=========== NativeScript Edition ==========="));
+            console.log(chalk.cyan("=============== NativeScript Edition ==============="));
             console.log("");
-            console.log("Mobile Center CodePush is a service that enables you to deploy mobile app updates directly to your users' devices.\n");
             updateCheck();
         }
 
@@ -313,25 +312,27 @@ var argv = yargs.usage(USAGE_PREFIX + " <command>")
 
         addCommonConfiguration(yargs);
     })
+    /*
     .command("link", "Link an additional authentication provider (e.g. GitHub) to an existing Mobile Center account", (yargs: yargs.Argv) => {
         isValidCommandCategory = true;
         isValidCommand = true;
         yargs.usage(USAGE_PREFIX + " link")
-            .demand(/*count*/ 0, /*max*/ 1)  //set 'max' to one to allow usage of serverUrl undocument parameter for testing
+            .demand(0, 1)  //set 'max' to one to allow usage of serverUrl undocument parameter for testing
             .example("link", "Links an account on the Mobile Center server")
             .check((argv: any, aliases: { [aliases: string]: string }): any => isValidCommand);  // Report unrecognized, non-hyphenated command category.
 
         addCommonConfiguration(yargs);
     })
+    */
     .command("login", "Authenticate in order to begin managing your apps", (yargs: yargs.Argv) => {
         isValidCommandCategory = true;
         isValidCommand = true;
         yargs.usage(USAGE_PREFIX + " login [options]")
             .demand(/*count*/ 0, /*max*/ 1)  //set 'max' to one to allow usage of serverUrl undocument parameter for testing
-            .example("login", "Logs in to the Mobile Center server")
+            .example("login", "Logs in to the server")
             .example("login --accessKey mykey", "Logs in on behalf of the user who owns and created the access key \"mykey\"")
             .example("login --proxy http://someproxy.com:455", "Logs in with the specified proxy url")
-            .option("accessKey", { alias: "key", default: null, demand: false, description: "Access key to authenticate against the Mobile Center server with, instead of providing your username and password credentials", type: "string" })
+            .option("accessKey", { alias: "key", default: null, demand: false, description: "Access key to authenticate against the server with, instead of providing your username and password credentials", type: "string" })
             .option("proxy", { default: null, demand: false, description: "URL of the proxy server to use", type: "string" })
             .option("noProxy", { default: false, demand: false, description: "Bypass the system-wide proxy settings", type: "boolean" })
             .check((argv: any, aliases: { [aliases: string]: string }): any => isValidCommand);  // Report unrecognized, non-hyphenated command category.
@@ -377,12 +378,12 @@ var argv = yargs.usage(USAGE_PREFIX + " <command>")
 
         addCommonConfiguration(yargs);
     })
-    .command("register", "Register a new Mobile Center account", (yargs: yargs.Argv) => {
+    .command("register", "Register a new account", (yargs: yargs.Argv) => {
         isValidCommandCategory = true;
         isValidCommand = true;
         yargs.usage(USAGE_PREFIX + " register")
             .demand(/*count*/ 0, /*max*/ 1)  //set 'max' to one to allow usage of serverUrl undocument parameter for testing
-            .example("register", "Registers a new Mobile Center account")
+            .example("register", "Registers a new account")
             .example("register --proxy http://someproxy.com:455", "Registers with the specified proxy url")
             .option("proxy", { default: null, demand: false, description: "URL of the proxy server to use", type: "string" })
             .option("noProxy", { default: false, demand: false, description: "Bypass the system-wide proxy settings", type: "boolean" })
@@ -390,9 +391,10 @@ var argv = yargs.usage(USAGE_PREFIX + " <command>")
 
         addCommonConfiguration(yargs);
     })
+    /*
     .command("release", "Release an update to an app deployment", (yargs: yargs.Argv) => {
         yargs.usage(USAGE_PREFIX + " release <appName> <updateContentsPath> <targetBinaryVersion> [options]")
-            .demand(/*count*/ 3, /*max*/ 3)  // Require exactly three non-option arguments.
+            .demand(3, 3)  // Require exactly three non-option arguments.
             .example("release MyApp app.js \"*\"", "Releases the \"app.js\" file to the \"MyApp\" app's \"Staging\" deployment, targeting any binary version using the \"*\" wildcard range syntax.")
             .example("release MyApp ./platforms/ios/www 1.0.3 -d Production -k ~/.ssh/codepush_rsa", "Releases the \"./platforms/ios/www\" folder and all its contents to the \"MyApp\" app's \"Production\" deployment, targeting only the 1.0.3 binary version and signed with the \"codepush_rsa\" private key")
             .example("release MyApp ./platforms/ios/www 1.0.3 -d Production -r 20", "Releases the \"./platforms/ios/www\" folder and all its contents to the \"MyApp\" app's \"Production\" deployment, targeting the 1.0.3 binary version and rolling out to about 20% of the users")
@@ -409,7 +411,7 @@ var argv = yargs.usage(USAGE_PREFIX + " <command>")
     })
     .command("release-cordova", "Release a Cordova update to an app deployment", (yargs: yargs.Argv) => {
         yargs.usage(USAGE_PREFIX + " release-cordova <appName> <platform> [options]")
-            .demand(/*count*/ 2, /*max*/ 2)  // Require exactly two non-option arguments
+            .demand(2, 2)  // Require exactly two non-option arguments
             .example("release-cordova MyApp ios", "Releases the Cordova iOS project in the current working directory to the \"MyApp\" app's \"Staging\" deployment")
             .example("release-cordova MyApp android -d Production", "Releases the Cordova Android project in the current working directory to the \"MyApp\" app's \"Production\" deployment")
             .option("build", { alias: "b", default: false, demand: false, description: "Invoke \"cordova build\" instead of \"cordova prepare\"", type: "boolean" })
@@ -428,7 +430,7 @@ var argv = yargs.usage(USAGE_PREFIX + " <command>")
     })
     .command("release-react", "Release a React Native update to an app deployment", (yargs: yargs.Argv) => {
         yargs.usage(USAGE_PREFIX + " release-react <appName> <platform> [options]")
-            .demand(/*count*/ 2, /*max*/ 2)  // Require exactly two non-option arguments
+            .demand(2, 2)  // Require exactly two non-option arguments
             .example("release-react MyApp ios", "Releases the React Native iOS project in the current working directory to the \"MyApp\" app's \"Staging\" deployment")
             .example("release-react MyApp android -d Production -k ~/.ssh/codepush_rsa", "Releases the React Native Android project in the current working directory to the \"MyApp\" app's \"Production\" deployment, signed with the \"codepush_rsa\" private key")
             .example("release-react MyApp windows --dev", "Releases the development bundle of the React Native Windows project in the current working directory to the \"MyApp\" app's \"Staging\" deployment")
@@ -453,11 +455,12 @@ var argv = yargs.usage(USAGE_PREFIX + " <command>")
 
         addCommonConfiguration(yargs);
     })
-    .command("release-nativescript", "Release a NativeScript update to an app deployment", (yargs: yargs.Argv) => {
-        yargs.usage(USAGE_PREFIX + " release-nativescript <appName> <platform> [options]")
+    */
+    .command("release", "Release a NativeScript update to an app deployment", (yargs: yargs.Argv) => {
+        yargs.usage(USAGE_PREFIX + " release <appName> <platform> [options]")
             .demand(/*count*/ 2, /*max*/ 2)  // Require exactly two non-option arguments
-            .example("release-nativescript MyApp ios", "Releases the NativeScript iOS project in the current working directory to the \"MyApp\" app's \"Staging\" deployment")
-            .example("release-nativescript MyApp android -d Production", "Releases the NativeScript Android project in the current working directory to the \"MyApp\" app's \"Production\" deployment")
+            .example("release MyApp ios", "Releases the NativeScript iOS project in the current working directory to the \"MyApp\" app's \"Staging\" deployment")
+            .example("release MyApp android -d Production", "Releases the NativeScript Android project in the current working directory to the \"MyApp\" app's \"Production\" deployment")
             .option("build", { alias: "b", default: false, demand: false, description: "Invoke \"tns build\" instead of assuming there's aleady a build waiting to be pushed", type: "boolean" })
             .option("isReleaseBuildType", { alias: "rb", default: false, demand: false, description: "If \"build\" option is true specifies whether to perform a release build", type: "boolean" })
             .option("keystorePath", { alias: "kp", default: null, demand: false, description: "If \"isReleaseBuildType\" option is true and \"platform\" is \"android\" specifies the path to the .keystore file", type: "string" })
@@ -590,7 +593,7 @@ function createCommand(): cli.ICommand {
 
                             appAddCommand.appName = arg2;
                             appAddCommand.os = arg3;
-                            appAddCommand.platform = arg4;
+                            appAddCommand.platform = arg4 || "nativescript"; // default to NativeScript, so no longer required to pass in
                         }
                         break;
 
@@ -820,6 +823,7 @@ function createCommand(): cli.ICommand {
                 registerCommand.noProxy = argv["noProxy"];
                 break;
 
+                /*
             case "release":
                 if (arg1 && arg2 && arg3) {
                     cmd = { type: cli.CommandType.release };
@@ -889,8 +893,9 @@ function createCommand(): cli.ICommand {
                     releaseReactCommand.config = argv["config"];
                 }
                 break;
+             */
 
-            case "release-nativescript":
+            case "release":
                 if (arg1 && arg2) {
                     cmd = { type: cli.CommandType.releaseNativeScript };
 

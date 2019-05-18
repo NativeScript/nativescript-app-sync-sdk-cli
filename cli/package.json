@@ -1,6 +1,6 @@
 {
   "name": "nativescript-code-push-cli",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "Management CLI for the CodePush service",
   "main": "script/cli.js",
   "scripts": {
