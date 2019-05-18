@@ -676,7 +676,7 @@ function loginWithExternalAuthentication(action: string, serverUrl?: string, pro
                     if (isAuthenticated) {
                         serializeConnectionInfo(accessKey, /*preserveAccessKeyOnLogout*/ false, serverUrl, proxy, noProxy);
                     } else {
-                        throw new Error("Invalid token.");
+                        throw new Error("Invalid access key.");
                     }
                 });
         });
@@ -1589,7 +1589,7 @@ function requestAccessKey(): Promise<string> {
         prompt.get({
             properties: {
                 response: {
-                    description: chalk.cyan("Enter your token from the browser: ")
+                    description: chalk.cyan("Enter the access key from the browser: ")
                 }
             }
         }, (err: any, result: any): void => {
