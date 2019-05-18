@@ -1,6 +1,6 @@
 {
   "name": "nativescript-code-push-sdk",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Management SDK for the CodePush service",
   "main": "script/index.js",
   "scripts": {
