@@ -625,12 +625,13 @@ function initiateExternalAuthenticationAsync(action: string, serverUrl?: string)
         opener(url);
     }
     else {
-        // We use this now for both login & register
-        message = `Please login to the browser window we've just opened.`;
-
-        log(message);
         var hostname: string = os.hostname();
         var url: string = `${serverUrl || AccountManager.SERVER_URL}/auth/${action}?hostname=${hostname}`;
+
+        // We use this now for both login & register
+        message = `Please login to the browser window we've just opened. If it fails, load this url in a browser: ${url}`;
+
+        log(message);
         opener(url);
     }
 }
