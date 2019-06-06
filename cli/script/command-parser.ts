@@ -214,7 +214,7 @@ var argv = yargs.usage(USAGE_PREFIX + " <command>")
             .demand(/*count*/ 2, /*max*/ 2)  // Require exactly two non-option arguments.
             .command("add", "Add a new app to your account", (yargs: yargs.Argv): void => {
                 isValidCommand = true;
-                yargs.usage(USAGE_PREFIX + " app add <appName> <os> <platform>")
+                yargs.usage(USAGE_PREFIX + " app add <appName> <os>")
                     .demand(/*count*/ 2, /*max*/ 2)  // Require exactly two non-option arguments
                     .example("app add MyApp ios", "Adds app \"MyApp\", indicating that it's an iOS NativeScript app")
                     .example("app add MyApp android", "Adds app \"MyApp\", indicating that it's an Android NativeScript app");
