@@ -1110,7 +1110,13 @@ function getNativeScriptProjectAppVersion(command: cli.IReleaseReactCommand, app
         try {
             var androidManifestContents: string = fs.readFileSync(androidManifest).toString();
         } catch (err) {
-            throw new Error(`Unable to find or read "${androidManifest}".`);
+            // alternative location (depends on NativeScript version)
+            androidManifest = path.join(androidResourcesFolder, "src", "main", "AndroidManifest.xml");
+            try {
+                androidManifestContents = fs.readFileSync(androidManifest).toString();
+            } catch (err2) {
+                throw new Error(`Unable to find or read "${androidManifest}".`);
+            }
         }
 
         return parseXml(androidManifestContents)
@@ -1128,8 +1134,6 @@ function getNativeScriptProjectAppVersion(command: cli.IReleaseReactCommand, app
     } else {
         throw new Error(`Unknown platform '${command.platform}' (expected 'ios' or 'android'), can't extract version information.`);
     }
-    // TODO remove
-    throw new Error(`TESTING..`);
 }
 
 function printJson(object: any): void {
@@ -1458,7 +1462,7 @@ export var releaseReact = (command: cli.IReleaseReactCommand): Promise<void> => 
             deleteFolder(outputFolder);
             throw err;
         });
-}
+};
 
 export var releaseNativeScript = (command: cli.IReleaseNativeScriptCommand): Promise<void> => {
     var releaseCommand: cli.IReleaseCommand = <any>command;
@@ -1481,7 +1485,7 @@ export var releaseNativeScript = (command: cli.IReleaseNativeScriptCommand): Pro
             var platform: string = command.platform.toLowerCase();
             var projectRoot: string = process.cwd();
             var platformFolder: string = path.join(projectRoot, "platforms", platform);
-            var iOSFolder = path.basename(projectRoot);
+            var iOSFolder = path.basename(projectRoot).replace(/[-]+/g, ''); // removes dashes
             var outputFolder: string;
             var appResourcesFolder: string = path.join(projectRoot, "app", "App_Resources");
             var nsConfigPackageJson: any;
@@ -1539,7 +1543,7 @@ export var releaseNativeScript = (command: cli.IReleaseNativeScriptCommand): Pro
                 try {
                     fs.lstatSync(outputFolder).isDirectory();
                 } catch (error) {
-                    throw new Error(`No "build" folder found - perform a "tns build" first, or add the "--build" flag to the "codepush" command.`);
+                    throw new Error(`Build folder expected at ${outputFolder}, but not found - perform a "tns build" first, or add the "--build" flag to the "codepush" command.`);
                 }
             }
 
