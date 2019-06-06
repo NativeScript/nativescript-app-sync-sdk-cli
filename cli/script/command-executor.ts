@@ -171,15 +171,15 @@ function appAdd(command: cli.IAppAddCommand): Promise<void> {
     else if (normalizedOs === "android") {
         os = "Android";
     }
-    else if (normalizedOs === "windows") {
-        os = "Windows";
-    }
+    // else if (normalizedOs === "windows") {
+    //     os = "Windows";
+    // }
     else {
-        return Q.reject<void>(new Error(`"${command.os}" is an unsupported OS. Available options are "ios", "android", and "windows".`));
+        return Q.reject<void>(new Error(`"${command.os}" is an unsupported OS. Available options are "ios" and "android".`));
     }
 
-    var platform: string;
-    const normalizedPlatform = command.platform.toLowerCase();
+    /*
+    const normalizedPlatform = command.platform.toLowerCase() || "nativescript";
     if (normalizedPlatform === "react-native") {
         platform = "React-Native";
     }
@@ -192,6 +192,9 @@ function appAdd(command: cli.IAppAddCommand): Promise<void> {
     else {
         return Q.reject<void>(new Error(`"${command.platform}" is an unsupported platform. Available options are "react-native", "cordova" and "nativescript".`));
     }
+    */
+
+    var platform = "NativeScript";
 
     return sdk.addApp(command.appName, os, platform, false)
         .then((app: App): Promise<void> => {
