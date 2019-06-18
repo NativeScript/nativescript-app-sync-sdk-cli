@@ -6,10 +6,10 @@ import * as os from "os";
 import * as path from "path";
 import * as q from "q";
 var rimraf = require("rimraf");
-import AccountManager = require("nativescript-code-push-sdk");
+import AccountManager = require("nativescript-app-sync-sdk");
 
 var CURRENT_CLAIM_VERSION: string = "1.0.0";
-var METADATA_FILE_NAME: string = ".codepushrelease";
+var METADATA_FILE_NAME: string = ".appsyncrelease";
 
 interface CodeSigningClaims {
     claimVersion: string;
@@ -66,8 +66,8 @@ var sign: cli.ReleaseHook = (currentCommand: cli.IReleaseCommand, originalComman
             }
 
             if (!fs.lstatSync(currentCommand.package).isDirectory()) {
-                // If releasing a single file, copy the file to a temporary 'CodePush' directory in which to publish the release
-                var outputFolderPath: string = path.join(os.tmpdir(), "CodePush");
+                // If releasing a single file, copy the file to a temporary 'AppSync' directory in which to publish the release
+                var outputFolderPath: string = path.join(os.tmpdir(), "AppSync");
                 rimraf.sync(outputFolderPath);
                 fs.mkdirSync(outputFolderPath);
 

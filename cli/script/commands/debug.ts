@@ -27,9 +27,9 @@ class AndroidDebugPlatform implements IDebugPlatform {
 
         // For now there is no ability to specify device for debug like:
         // code-push debug android "192.168.121.102:5555"
-        // So we have to throw an error in case more than 1 android device was attached 
+        // So we have to throw an error in case more than 1 android device was attached
         // otherwise we will very likely run into an exception while trying to read ‘adb logcat’ from device which codepushified app is not running on.
-        if (numberOfAvailableDevices > 1) { 
+        if (numberOfAvailableDevices > 1) {
             throw new Error(`Found "${numberOfAvailableDevices}" android devices. Please leave only one device you need to debug.`);
         }
 
@@ -82,7 +82,7 @@ class iOSDebugPlatform implements IDebugPlatform {
 
         const simulatorID: string = this.getSimulatorID();
         if (!simulatorID) {
-            throw new Error("No iOS simulators found. Re-run this command after starting one."); 
+            throw new Error("No iOS simulators found. Re-run this command after starting one.");
         }
 
         const logFilePath: string = path.join(process.env.HOME, "Library/Logs/CoreSimulator", simulatorID, "system.log");
@@ -94,9 +94,9 @@ class iOSDebugPlatform implements IDebugPlatform {
     }
 }
 
-const logMessagePrefix = "[CodePush] ";
+const logMessagePrefix = "[AppSync] ";
 function processLogData(logData: Buffer) {
-    const content = logData.toString()
+    const content = logData.toString();
     content.split("\n")
         .filter((line: string) => line.indexOf(logMessagePrefix) > -1)
         .map((line: string) => {
@@ -104,10 +104,10 @@ function processLogData(logData: Buffer) {
             // to normalize the message first.
             line = this.normalizeLogMessage(line);
 
-            // Strip the CodePush-specific, platform agnostic
+            // Strip the AppSync-specific, platform agnostic
             // log message prefix that is added to each entry.
             const message = line.substring(line.indexOf(logMessagePrefix) + logMessagePrefix.length);
-            
+
             const timeStamp = moment().format("hh:mm:ss");
             return `[${timeStamp}] ${message}`;
         })
@@ -136,9 +136,9 @@ export default function (command: cli.IDebugCommand): Q.Promise<void> {
             logProcess.stdout.on("data", processLogData.bind(debugPlatform));
             logProcess.stderr.on("data", reject);
 
-            logProcess.on("close", resolve); 
+            logProcess.on("close", resolve);
         } catch (e) {
             reject(e);
         }
-    }); 
+    });
 };

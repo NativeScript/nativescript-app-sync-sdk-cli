@@ -1,21 +1,21 @@
 {
-  "name": "nativescript-code-push-sdk",
-  "version": "1.0.4",
-  "description": "Management SDK for the CodePush service",
+  "name": "nativescript-app-sync-sdk",
+  "version": "1.0.0",
+  "description": "Management SDK for the NativeScript AppSync service",
   "main": "script/index.js",
   "scripts": {
     "test": "gulp"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/EddyVerbruggen/code-push.git"
+    "url": "https://github.com/EddyVerbruggen/nativescript-app-sync-sdk-cli.git"
   },
   "author": {
     "name": "Eddy Verbruggen",
     "email": "eddyverbruggen@gmail.com"
   },
   "license": "MIT",
-  "homepage": "https://github.com/EddyVerbruggen/code-push",
+  "homepage": "https://github.com/EddyVerbruggen/nativescript-app-sync-sdk-cli",
   "dependencies": {
     "q": "^1.4.1",
     "recursive-fs": "0.1.4",

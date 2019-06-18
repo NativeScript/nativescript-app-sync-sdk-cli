@@ -1,7 +1,9 @@
-# NativeScript CodePush
+# NativeScript AppSync
+
+> ❤️ Built upon the shoulders of giants. Or more accurate, [Microsoft CodePush](https://github.com/microsoft/code-push)!
 
 This repo includes the [management CLI](/cli) and [Node.js management SDK](/sdk), which allows you to manage and automate the needs of your apps.
-To get started using CodePush for NativeScript, refer to our [CodePush plugin docs](https://github.com/EddyVerbruggen/nativescript-code-push),
+To get started using AppSync for NativeScript, refer to our [AppSync plugin docs](https://github.com/EddyVerbruggen/nativescript-app-sync),
 otherwise, read the following steps if you'd like to build/contribute to the CLI/SDK.
 
 ## Dev Setup
@@ -9,7 +11,7 @@ otherwise, read the following steps if you'd like to build/contribute to the CLI
 * Install [Node.js](https://nodejs.org/)
 * Install [Git](http://www.git-scm.com/)
 * Install [Gulp](https://gulpjs.com/): `npm install -g gulp`
-* Clone the Repository: `git clone https://github.com/EddyVerbruggen/code-push.git`
+* Clone the Repository: `git clone https://github.com/EddyVerbruggen/nativescript-app-sync-sdk-cli.git`
 
 ### Building
 

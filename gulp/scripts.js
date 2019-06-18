@@ -13,7 +13,7 @@ var dtsGenerator = require("dts-generator");
 
 var generatedDefinitionDependencies = {
     sdk: [],
-    cli: ["code-push"]
+    cli: ["nativescript-app-sync-cli"]
 };
 
 function tsJsxPipe(file, enc, cb) {

@@ -1,5 +1,5 @@
 /**
- * NOTE!!! This utility file is duplicated for use by the CodePush service (for server-driven hashing/
+ * NOTE!!! This utility file is duplicated for use by the AppSync service (for server-driven hashing/
  * integrity checks) and Management SDK (for end-to-end code signing), please keep them in sync.
  */
 
@@ -232,12 +232,12 @@ export class PackageManifest {
     public static isIgnored(relativeFilePath: string): boolean {
         const __MACOSX = "__MACOSX/";
         const DS_STORE = ".DS_Store";
-        const CODEPUSH_METADATA = ".codepushrelease";
+        const APPSYNC_METADATA = ".appsyncrelease";
         return startsWith(relativeFilePath, __MACOSX)
             || relativeFilePath === DS_STORE
             || endsWith(relativeFilePath, "/" + DS_STORE)
-            || relativeFilePath === CODEPUSH_METADATA
-            || endsWith(relativeFilePath, "/" + CODEPUSH_METADATA);
+            || relativeFilePath === APPSYNC_METADATA
+            || endsWith(relativeFilePath, "/" + APPSYNC_METADATA);
     }
 }
 

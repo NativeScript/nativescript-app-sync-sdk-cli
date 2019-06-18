@@ -7,7 +7,7 @@ import parseDuration = require("parse-duration");
 
 var packageJson = require("../package.json");
 const ROLLOUT_PERCENTAGE_REGEX: RegExp = /^(100|[1-9][0-9]|[1-9])%?$/;
-const USAGE_PREFIX = "Usage: nativescript-code-push";
+const USAGE_PREFIX = "Usage: nativescript-app-sync";
 
 // Command categories are:  access-key, app, release, deployment, deployment-key, login, logout, register
 var isValidCommandCategory = false;
@@ -18,11 +18,16 @@ var wasHelpShown = false;
 export function showHelp(showRootDescription?: boolean): void {
     if (!wasHelpShown) {
         if (showRootDescription) {
-            console.log(chalk.cyan("  _____        __  " + chalk.green("  ___           __ ")));
-            console.log(chalk.cyan(" / ___/__  ___/ /__" + chalk.green(" / _ \\__ _____ / / ")));
-            console.log(chalk.cyan("/ /__/ _ \\/ _  / -_)" + chalk.green(" ___/ // (_-</ _ \\")));
-            console.log(chalk.cyan("\\___/\\___/\\_,_/\\__/" + chalk.green("_/   \\_,_/___/_//_/")) + "    CLI v" + packageJson.version);
-            console.log(chalk.cyan("=============== NativeScript Edition ==============="));
+            console.log("");
+            console.log(chalk.cyan("                     (                   "));
+            console.log(chalk.cyan("   (                 )\ )                "));
+            console.log(chalk.cyan("   )\               (()/((               "));
+            console.log(chalk.cyan("((((_)(  `  )  `  )  /(_))\ )  (     (   "));
+            console.log(chalk.cyan(" )\ _ )\ /(/(  /(/( (_))(()/(  )\ )  )\  "));
+            console.log(chalk.cyan(" (_)_\(_|(_)_\((_)_\/ __|)(_))_(_/( ((_) "));
+            console.log(chalk.cyan("  / _ \ | '_ \) '_ \)__ \ || | ' \)) _|  "));
+            console.log(chalk.cyan(" /_/ \_\| .__/| .__/|___/\_, |_||_|\__|    CLI v" + packageJson.version));
+            console.log(chalk.cyan("        |_|   |_|        |__/            "));
             console.log("");
             updateCheck();
         }
@@ -208,7 +213,7 @@ var argv = yargs.usage(USAGE_PREFIX + " <command>")
 
         addCommonConfiguration(yargs);
     })
-    .command("app", "View and manage your CodePush apps", (yargs: yargs.Argv) => {
+    .command("app", "View and manage your AppSync apps", (yargs: yargs.Argv) => {
         isValidCommandCategory = true;
         yargs.usage(USAGE_PREFIX + " app <command>")
             .demand(/*count*/ 2, /*max*/ 2)  // Require exactly two non-option arguments.
@@ -266,13 +271,13 @@ var argv = yargs.usage(USAGE_PREFIX + " <command>")
 
         addCommonConfiguration(yargs);
     })
-    .command("debug", "View the CodePush debug logs for a running app", (yargs: yargs.Argv) => {
+    .command("debug", "View the AppSync debug logs for a running app", (yargs: yargs.Argv) => {
         isValidCommandCategory = true;
         isValidCommand = true;
         yargs.usage(USAGE_PREFIX + " debug <platform>")
             .demand(/*count*/ 1, /*max*/ 1) // Require exactly one non-option arguments
-            .example("debug android", "View the CodePush debug logs for an Android emulator or device")
-            .example("debug ios", "View the CodePush debug logs for the iOS simulator");
+            .example("debug android", "View the AppSync debug logs for an Android emulator or device")
+            .example("debug ios", "View the AppSync debug logs for the iOS simulator");
 
         addCommonConfiguration(yargs);
     })
@@ -458,7 +463,7 @@ var argv = yargs.usage(USAGE_PREFIX + " <command>")
             .demand(/*count*/ 2, /*max*/ 2)  // Require exactly two non-option arguments
             .example("release MyApp ios", "Releases the NativeScript iOS project in the current working directory to the \"MyApp\" app's \"Staging\" deployment")
             .example("release MyApp android -d Production", "Releases the NativeScript Android project in the current working directory to the \"MyApp\" app's \"Production\" deployment")
-            .option("build", { alias: "b", default: false, demand: false, description: "Invoke \"tns build\" instead of assuming there's aleady a build waiting to be pushed", type: "boolean" })
+            .option("build", { alias: "b", default: false, demand: false, description: "Invoke \"tns build\" instead of assuming there's already a build waiting to be synced", type: "boolean" })
             .option("isReleaseBuildType", { alias: "rb", default: false, demand: false, description: "If \"build\" option is true specifies whether to perform a release build", type: "boolean" })
             .option("keystorePath", { alias: "kp", default: null, demand: false, description: "If \"isReleaseBuildType\" option is true and \"platform\" is \"android\" specifies the path to the .keystore file", type: "string" })
             .option("keystorePassword", { alias: "kpw", default: null, demand: false, description: "If \"isReleaseBuildType\" option is true and \"platform\" is \"android\" specifies the password for the .keystore file", type: "string" })

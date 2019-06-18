@@ -486,7 +486,7 @@ class AccountManager {
 
     private getCodePushError(error: any, response: superagent.Response): CodePushError {
         if (error.syscall === "getaddrinfo") {
-            error.message = `Unable to connect to the CodePush server. Are you offline, or behind a firewall or proxy?\n(${error.message})`;
+            error.message = `Unable to connect to the AppSync server. Are you offline, or behind a firewall or proxy?\n(${error.message})`;
         }
 
         return {
@@ -510,9 +510,9 @@ class AccountManager {
             }
         }
 
-        request.set("Accept", `application/vnd.code-push.v${AccountManager.API_VERSION}+json`);
+        request.set("Accept", `application/vnd.app-sync.v${AccountManager.API_VERSION}+json`);
         request.set("Authorization", `Bearer ${this._accessKey}`);
-        request.set("X-CodePush-SDK-Version", packageJson.version);
+        request.set("X-NativeScript-AppSync-SDK-Version", packageJson.version);
     }
 
     // IIS and Azure web apps have this annoying behavior where %2F (URL encoded slashes) in the URL are URL decoded

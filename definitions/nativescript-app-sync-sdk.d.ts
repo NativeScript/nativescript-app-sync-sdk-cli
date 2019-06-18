@@ -1,4 +1,4 @@
-declare module 'nativescript-code-push-sdk/script/acquisition-sdk' {
+declare module 'nativescript-app-sync-sdk/script/acquisition-sdk' {
 	export module Http {
 	    const enum Verb {
 	        GET = 0,
@@ -67,7 +67,7 @@ declare module 'nativescript-code-push-sdk/script/acquisition-sdk' {
 	}
 
 }
-declare module 'nativescript-code-push-sdk/script/types' {
+declare module 'nativescript-app-sync-sdk/script/types' {
 	export { AccessKeyRequest, Account, App, AppCreationRequest, CollaboratorMap, CollaboratorProperties, Deployment, DeploymentMetrics, Package, PackageInfo, AccessKey as ServerAccessKey, UpdateMetrics } from "rest-definitions";
 	export interface CodePushError {
 	    message: string;
@@ -88,10 +88,10 @@ declare module 'nativescript-code-push-sdk/script/types' {
 	};
 
 }
-declare module 'nativescript-code-push-sdk/script/management-sdk' {
+declare module 'nativescript-app-sync-sdk/script/management-sdk' {
 	import Q = require("q");
 	import Promise = Q.Promise;
-	import { AccessKey, Account, App, CollaboratorMap, Deployment, DeploymentMetrics, Headers, Package, PackageInfo, Session } from 'nativescript-code-push-sdk/script/types'; class AccountManager {
+	import { AccessKey, Account, App, CollaboratorMap, Deployment, DeploymentMetrics, Headers, Package, PackageInfo, Session } from 'nativescript-app-sync-sdk/script/types'; class AccountManager {
 	    static AppPermission: {
 	        OWNER: string;
 	        COLLABORATOR: string;
@@ -156,12 +156,12 @@ declare module 'nativescript-code-push-sdk/script/management-sdk' {
 	export = AccountManager;
 
 }
-declare module 'nativescript-code-push-sdk/script/index' {
-	import AccountManager = require('nativescript-code-push-sdk/script/management-sdk');
+declare module 'nativescript-app-sync-sdk/script/index' {
+	import AccountManager = require('nativescript-app-sync-sdk/script/management-sdk');
 	export = AccountManager;
 
 }
-declare module 'nativescript-code-push-sdk' {
-	import main = require('nativescript-code-push-sdk/script/index');
+declare module 'nativescript-app-sync-sdk' {
+	import main = require('nativescript-app-sync-sdk/script/index');
 	export = main;
 }

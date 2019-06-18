@@ -41,11 +41,11 @@ gulp.task("link-sdk", ["content-sdk"], function(done) {
 });
 
 gulp.task("link-cli", function(done) {
-    linkDependency(path.join(__dirname, "..", "cli"), "code-push", done);
+    linkDependency(path.join(__dirname, "..", "cli"), "nativescript-app-sync-cli", done);
 });
 
 gulp.task("link-cli-bin", function(done) {
-    linkDependency(path.join(__dirname, "..", "cli"), "code-push", function() {
+    linkDependency(path.join(__dirname, "..", "cli"), "nativescript-app-sync", function() {
         runSequence("build-cli", function() {
             linkPackage(path.join(__dirname, "..", "cli", "bin"), /*createBinLinks=*/ true, done);
         });

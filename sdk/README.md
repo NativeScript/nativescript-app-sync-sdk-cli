@@ -1,3 +1,3 @@
-# NativeScript CodePush Management SDK
+# NativeScript AppSync Management SDK
 
-Please refer to the [NativeScript plugin docs](https://github.com/EddyVerbruggen/nativescript-code-push).
+Please refer to the [NativeScript plugin docs](https://github.com/EddyVerbruggen/nativescript-app-sync).

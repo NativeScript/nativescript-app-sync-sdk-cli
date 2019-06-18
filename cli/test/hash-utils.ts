@@ -66,7 +66,7 @@ function unzipToDirectory(zipPath: string, directoryPath: string): Promise<void>
 }
 
 describe("Hashing utility", () => {
-    const TEST_DIRECTORY = path.join(os.tmpdir(), "codepushtests", randomString());
+    const TEST_DIRECTORY = path.join(os.tmpdir(), "appsynctests", randomString());
 
     const TEST_ARCHIVE_FILE_PATH = path.join(__dirname, "resources", "test.zip");
     const TEST_ZIP_HASH = "540fed8df3553079e81d1353c5cc4e3cac7db9aea647a85d550f646e8620c317";

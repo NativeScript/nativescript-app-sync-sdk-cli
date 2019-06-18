@@ -3,7 +3,7 @@
 /// <reference path="../../definitions/recursive-fs.d.ts" />
 /// <reference path="../../definitions/slash.d.ts" />
 /// <reference path="../definitions/slash.d.ts" />
-/// <reference path="../../../definitions/nativescript-code-push-sdk.d.ts" />
+/// <reference path="../../../definitions/nativescript-app-sync-sdk.d.ts" />
 
 import * as fs from "fs";
 import * as path from "path";
@@ -14,8 +14,8 @@ import Promise = Q.Promise;
 import * as yazl from "yazl";
 var progress = require("progress");
 
-import AccountManager = require("nativescript-code-push-sdk");
-import {Package, PackageInfo} from "nativescript-code-push-sdk/script/types";
+import AccountManager = require("nativescript-app-sync-sdk");
+import {Package, PackageInfo} from "nativescript-app-sync-sdk/script/types";
 import {CommonUtils} from "../common-utils";
 var log = CommonUtils.log;
 import * as cli from "../../definitions/cli";

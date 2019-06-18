@@ -1,6 +1,6 @@
-﻿/// <reference path="../../definitions/nativescript-code-push-sdk.d.ts" />
+﻿/// <reference path="../../definitions/nativescript-app-sync-sdk.d.ts" />
 
-import AccountManager = require("nativescript-code-push-sdk");
+import AccountManager = require("nativescript-app-sync-sdk");
 import * as chalk from "chalk";
 var childProcess = require("child_process");
 import debugCommand from "./commands/debug";
@@ -21,9 +21,9 @@ var which = require("which");
 import wordwrap = require("wordwrap");
 import * as cli from "../definitions/cli";
 import hooks from "./release-hooks/index";
-import { AccessKey, Account, App, CodePushError, CollaboratorMap, CollaboratorProperties, Deployment, DeploymentMetrics, Headers, Package, PackageInfo, Session, UpdateMetrics } from "nativescript-code-push-sdk/script/types";
+import { AccessKey, Account, App, CodePushError, CollaboratorMap, CollaboratorProperties, Deployment, DeploymentMetrics, Headers, Package, PackageInfo, Session, UpdateMetrics } from "nativescript-app-sync-sdk/script/types";
 
-var configFilePath: string = path.join(process.env.LOCALAPPDATA || process.env.HOME, ".nativescript-code-push.config");
+var configFilePath: string = path.join(process.env.LOCALAPPDATA || process.env.HOME, ".nativescript-app-sync.config");
 var emailValidator = require("email-validator");
 var packageJson = require("../package.json");
 var parseXml = Q.denodeify(require("xml2js").parseString);
@@ -33,7 +33,7 @@ var properties = require("properties");
 
 const ACTIVE_METRICS_KEY: string = "Active";
 const CLI_HEADERS: Headers = {
-    "X-CodePush-CLI-Version": packageJson.version
+    "X-NativeScript-AppSync-CLI-Version": packageJson.version
 };
 const DOWNLOADED_METRICS_KEY: string = "Downloaded";
 
@@ -485,7 +485,7 @@ export function execute(command: cli.ICommand): Promise<void> {
                     if (!!sdk) break; // Used by unit tests to skip authentication
 
                     if (!connectionInfo) {
-                        throw new Error("You are not currently logged in. Run the 'nativescript-code-push login' command to authenticate with the CodePush server.");
+                        throw new Error("You are not currently logged in. Run the 'nativescript-app-sync login' command to authenticate with the AppSync server.");
                     }
 
                     sdk = getSdk(connectionInfo.accessKey, CLI_HEADERS, connectionInfo.customServerUrl, connectionInfo.proxy);
@@ -1358,7 +1358,7 @@ export var releaseCordova = (command: cli.IReleaseCordovaCommand): Promise<void>
             throwForInvalidSemverRange(releaseTargetVersion);
             releaseCommand.appStoreVersion = releaseTargetVersion;
 
-            log(chalk.cyan("\nReleasing update contents to CodePush:\n"));
+            log(chalk.cyan("\nReleasing update contents to AppSync:\n"));
             return release(releaseCommand);
         });
 }
@@ -1543,7 +1543,7 @@ export var releaseNativeScript = (command: cli.IReleaseNativeScriptCommand): Pro
                 try {
                     fs.lstatSync(outputFolder).isDirectory();
                 } catch (error) {
-                    throw new Error(`Build folder expected at ${outputFolder}, but not found - perform a "tns build" first, or add the "--build" flag to the "codepush" command.`);
+                    throw new Error(`Build folder expected at ${outputFolder}, but not found - perform a "tns build" first, or add the "--build" flag to the "appsync" command.`);
                 }
             }
 
@@ -1556,7 +1556,7 @@ export var releaseNativeScript = (command: cli.IReleaseNativeScriptCommand): Pro
         })
         .then((appVersion: string) => {
             releaseCommand.appStoreVersion = appVersion;
-            log(chalk.cyan("\nReleasing update contents to CodePush:\n"));
+            log(chalk.cyan("\nReleasing update contents to AppSync:\n"));
             return release(releaseCommand);
         });
 };
@@ -1566,7 +1566,7 @@ function validateDeployment(appName: string, deploymentName: string): Promise<vo
         .catch((err: any) => {
             // If we get an error that the deployment doesn't exist (but not the app doesn't exist), then tack on a more descriptive error message telling the user what to do
             if (err.statusCode === AccountManager.ERROR_NOT_FOUND && err.message.indexOf("Deployment") !== -1) {
-                err.message = err.message + "\nUse \"nativescript-code-push deployment list\" to view any existing deployments and \"nativescript-code-push deployment add\" to add deployment(s) to the app.";
+                err.message = err.message + "\nUse \"nativescript-app-sync deployment list\" to view any existing deployments and \"nativescript-app-sync deployment add\" to add deployment(s) to the app.";
             }
             throw err;
         });
@@ -1667,7 +1667,7 @@ function serializeConnectionInfo(accessKey: string, preserveAccessKeyOnLogout: b
     var json: string = JSON.stringify(connectionInfo);
     fs.writeFileSync(configFilePath, json, { encoding: "utf8" });
 
-    log(`\r\nSuccessfully logged-in. Your session file was written to ${chalk.cyan(configFilePath)}. You can run the ${chalk.cyan("nativescript-code-push logout")} command at any time to delete this file and terminate your session.\r\n`);
+    log(`\r\nSuccessfully logged-in. Your session file was written to ${chalk.cyan(configFilePath)}. You can run the ${chalk.cyan("nativescript-app-sync logout")} command at any time to delete this file and terminate your session.\r\n`);
 }
 
 function sessionList(command: cli.ISessionListCommand): Promise<void> {
@@ -1681,7 +1681,7 @@ function sessionList(command: cli.ISessionListCommand): Promise<void> {
 
 function sessionRemove(command: cli.ISessionRemoveCommand): Promise<void> {
     if (os.hostname() === command.machineName) {
-        throw new Error("Cannot remove the current login session via this command. Please run 'nativescript-code-push logout' instead.");
+        throw new Error("Cannot remove the current login session via this command. Please run 'nativescript-app-sync logout' instead.");
     } else {
         return confirm()
             .then((wasConfirmed: boolean): Promise<void> => {

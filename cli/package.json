@@ -1,24 +1,28 @@
 {
-  "name": "nativescript-code-push-cli",
-  "version": "1.0.7",
-  "description": "Management CLI for the CodePush service",
+  "name": "nativescript-app-sync-cli",
+  "version": "1.0.0",
+  "description": "Management CLI for the NativeScript AppSync service",
   "main": "script/cli.js",
   "scripts": {
     "test": "gulp test"
   },
   "bin": {
-    "nativescript-code-push": "script/cli.js"
+    "nativescript-app-sync": "script/cli.js"
   },
   "repository": {
-    "type": "git",
-    "url": "https://github.com/EddyVerbruggen/code-push"
+    "type": "git"
   },
+  "url": "https://github.com/EddyVerbruggen/nativescript-app-sync-sdk-cli.git",
   "keywords": [
     "code",
     "push",
+    "codepush",
+    "appsync",
+    "app sync",
+    "sync",
     "nativescript"
   ],
-  "homepage": "https://github.com/EddyVerbruggen/code-push",
+  "homepage": "https://github.com/EddyVerbruggen/nativescript-app-sync-sdk-cli",
   "author": {
     "name": "Eddy Verbruggen",
     "email": "eddyverbruggen@gmail.com"
@@ -29,7 +33,7 @@
     "base-64": "^0.1.0",
     "chalk": "^1.1.0",
     "cli-table": "^0.3.1",
-    "nativescript-code-push-sdk": "~1.0.0",
+    "nativescript-app-sync-sdk": "~1.0.0",
     "email-validator": "^1.0.3",
     "gradle-to-js": "^1.0.1",
     "jsonwebtoken": "^8.3.0",

@@ -1,5 +1,5 @@
-﻿/// <reference path="../../definitions/nativescript-code-push-sdk.d.ts" />
-import AccountManager = require("nativescript-code-push-sdk");
+﻿/// <reference path="../../definitions/nativescript-app-sync-sdk.d.ts" />
+import AccountManager = require("nativescript-app-sync-sdk");
 
 export enum CommandType {
     accessKeyAdd,
