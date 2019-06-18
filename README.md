@@ -1,6 +1,6 @@
 # NativeScript AppSync
 
-> ❤️ Built upon the shoulders of giants. Or more accurate, [Microsoft CodePush](https://github.com/microsoft/code-push)!
+> ❤️ Built upon the shoulders of giants. Or more accurately, [Microsoft CodePush](https://github.com/microsoft/code-push)!
 
 This repo includes the [management CLI](/cli) and [Node.js management SDK](/sdk), which allows you to manage and automate the needs of your apps.
 To get started using AppSync for NativeScript, refer to our [AppSync plugin docs](https://github.com/EddyVerbruggen/nativescript-app-sync),
