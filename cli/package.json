@@ -1,6 +1,6 @@
 {
   "name": "nativescript-app-sync-cli",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Management CLI for the NativeScript AppSync service",
   "main": "script/cli.js",
   "scripts": {
@@ -33,7 +33,7 @@
     "base-64": "^0.1.0",
     "chalk": "^1.1.0",
     "cli-table": "^0.3.1",
-    "nativescript-app-sync-sdk": "~1.0.0",
+    "nativescript-app-sync-sdk": "~1.0.1",
     "email-validator": "^1.0.3",
     "gradle-to-js": "^1.0.1",
     "jsonwebtoken": "^8.3.0",
