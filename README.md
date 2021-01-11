@@ -1,4 +1,4 @@
-# NativeScript AppSync
+# NativeScript AppSync  Test
 
 > ❤️ Built upon the shoulders of giants. Or more accurately, [Microsoft CodePush](https://github.com/microsoft/code-push)!
 
