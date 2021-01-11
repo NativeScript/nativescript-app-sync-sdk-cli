@@ -1491,7 +1491,7 @@ export var releaseNativeScript = (command: cli.IReleaseNativeScriptCommand): Pro
             var platformFolder: string = path.join(projectRoot, "platforms", platform);
             var iOSFolder = path.basename(projectRoot).replace(/[-]+/g, ''); // removes dashes
             var outputFolder: string;
-            var appResourcesFolder;
+            var appResourcesFolder: string;
             var nsConfigPackageJson: any;
             try {
                 nsConfigPackageJson = require(path.join(process.cwd(), "nsconfig.json"));
