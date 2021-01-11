@@ -219,6 +219,7 @@ export interface IReleaseNativeScriptCommand extends IReleaseBaseCommand {
     keystorePassword?: string;
     keystoreAlias?: string;
     keystoreAliasPassword?: string;
+    appResourcesPath?: string;
 }
 
 export interface IRollbackCommand extends ICommand {

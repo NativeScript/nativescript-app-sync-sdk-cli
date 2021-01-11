@@ -1478,16 +1478,20 @@ export var releaseNativeScript = (command: cli.IReleaseNativeScriptCommand): Pro
                 throw new Error("Unable to find or read \"package.json\" in the CWD. The \"release\" command must be executed in a NativeScript project folder.");
             }
 
-            if (!projectPackageJson.nativescript) {
+            //ns 7 files
+            var projectRoot: string = process.cwd();
+            var tsConfig = path.join(projectRoot, 'nativescript.config.ts');
+            var jsConfig = path.join(projectRoot, 'nativescript.config.js');
+
+            if (!(fs.existsSync(tsConfig) || fs.existsSync(jsConfig) || projectPackageJson.nativescript)) {
                 throw new Error("The project in the CWD is not a NativeScript project.");
             }
 
             var platform: string = command.platform.toLowerCase();
-            var projectRoot: string = process.cwd();
             var platformFolder: string = path.join(projectRoot, "platforms", platform);
             var iOSFolder = path.basename(projectRoot).replace(/[-]+/g, ''); // removes dashes
             var outputFolder: string;
-            var appResourcesFolder: string = path.join(projectRoot, "app", "App_Resources");
+            var appResourcesFolder: string;
             var nsConfigPackageJson: any;
             try {
                 nsConfigPackageJson = require(path.join(process.cwd(), "nsconfig.json"));
@@ -1495,7 +1499,13 @@ export var releaseNativeScript = (command: cli.IReleaseNativeScriptCommand): Pro
                     appResourcesFolder = path.join(projectRoot, nsConfigPackageJson.appResourcesPath);
                 }
             } catch (ignore) {
-                // no nsconfig.json found, so using defaults for app and app_resources folders
+                // no nsconfig.json found, so ns7 project
+                // no easy way to find appResources folder so using defaults or rely on options paramter "appResourcesPath"
+                if(command.appResourcesPath) {
+                    appResourcesFolder = path.join(projectRoot,command.appResourcesPath);
+                } else {
+                    appResourcesFolder = path.join(projectRoot, "App_Resources")
+                }
             }
 
             if (platform === "ios") {
@@ -1516,7 +1526,13 @@ export var releaseNativeScript = (command: cli.IReleaseNativeScriptCommand): Pro
                 try {
                     which.sync(nativeScriptCLI);
                 } catch (e) {
-                    throw new Error(`Unable to run "${nativeScriptCLI} ${nativeScriptCommand}". Please ensure that the NativeScript CLI is installed.`);
+                    //try for ns7 or up
+                    try {
+                        nativeScriptCLI = "ns"
+                        which.sync(nativeScriptCLI);
+                    } catch(e) {
+                        throw new Error(`Unable to run "${nativeScriptCLI} ${nativeScriptCommand}". Please ensure that the NativeScript CLI is installed.`);
+                    }
                 }
 
                 var nativeScriptCommand: string = "build " + platform;
