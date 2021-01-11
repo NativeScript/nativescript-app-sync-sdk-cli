@@ -476,7 +476,7 @@ var argv = yargs.usage(USAGE_PREFIX + " <command>")
             .option("noDuplicateReleaseError", { default: false, demand: false, description: "When this flag is set, releasing a package that is identical to the latest release will produce a warning instead of an error", type: "boolean" })
             .option("rollout", { alias: "r", default: "100%", demand: false, description: "Percentage of users this release should be immediately available to", type: "string" })
             .option("targetBinaryVersion", { alias: "t", default: null, demand: false, description: "Semver expression that specifies the binary app version(s) this release is targeting (e.g. 1.1.0, ~1.2.3). If omitted, the release will target the exact version specified in \"Info.plist\" (iOS) or \"AndroidManifest.xml\" (Android).", type: "string" })
-            .option("appResourcesPath", { alias: "a", default: "App_Resources", demand: false, description: "Specify the reletive path of the app resources from project root", type: "string" })
+            .option("appResourcesPath", { alias: "a", default: "App_Resources", demand: false, description: "Specify the relative path of the app resources from project root", type: "string" })
             .check((argv: any, aliases: { [aliases: string]: string }): any => { return checkValidReleaseOptions(argv); });
 
         addCommonConfiguration(yargs);
