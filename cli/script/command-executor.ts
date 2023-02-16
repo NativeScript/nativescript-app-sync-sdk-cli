@@ -1478,16 +1478,12 @@ export var releaseNativeScript = (command: cli.IReleaseNativeScriptCommand): Pro
                 throw new Error("Unable to find or read \"package.json\" in the CWD. The \"release\" command must be executed in a NativeScript project folder.");
             }
 
-            if (!projectPackageJson.nativescript) {
-                throw new Error("The project in the CWD is not a NativeScript project.");
-            }
-
             var platform: string = command.platform.toLowerCase();
             var projectRoot: string = process.cwd();
             var platformFolder: string = path.join(projectRoot, "platforms", platform);
             var iOSFolder = path.basename(projectRoot).replace(/[-]+/g, ''); // removes dashes
             var outputFolder: string;
-            var appResourcesFolder: string = path.join(projectRoot, "app", "App_Resources");
+            var appResourcesFolder: string = path.join(projectRoot, "App_Resources");
             var nsConfigPackageJson: any;
             try {
                 nsConfigPackageJson = require(path.join(process.cwd(), "nsconfig.json"));
