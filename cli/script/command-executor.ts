@@ -1260,7 +1260,8 @@ export var release = (command: cli.IReleaseCommand): Promise<void> => {
             package: command.package,
             rollout: command.rollout,
             privateKeyPath: command.privateKeyPath,
-            type: command.type
+            type: command.type,
+            infoPlistPath: command.infoPlistPath
         };
 
         var releaseHooksPromise = hooks.reduce((accumulatedPromise: Q.Promise<cli.IReleaseCommand>, hook: cli.ReleaseHook) => {
@@ -1484,6 +1485,7 @@ export var releaseNativeScript = (command: cli.IReleaseNativeScriptCommand): Pro
             var iOSFolder = path.basename(projectRoot).replace(/[-]+/g, ''); // removes dashes
             var outputFolder: string;
             var appResourcesFolder: string = path.join(projectRoot, "App_Resources");
+            var infoPlistPath = path.join(projectRoot, "App_Resources", "iOS", "Info.plist");     
             var nsConfigPackageJson: any;
             try {
                 nsConfigPackageJson = require(path.join(process.cwd(), "nsconfig.json"));
@@ -1545,6 +1547,8 @@ export var releaseNativeScript = (command: cli.IReleaseNativeScriptCommand): Pro
 
             releaseCommand.package = outputFolder;
             releaseCommand.type = cli.CommandType.release;
+
+            releaseCommand.infoPlistPath = infoPlistPath;
 
             return command.appStoreVersion
                 ? Q(command.appStoreVersion)

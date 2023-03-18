@@ -190,6 +190,7 @@ export interface IReleaseBaseCommand extends ICommand, IPackageInfo {
 
 export interface IReleaseCommand extends IReleaseBaseCommand {
     package: string;
+    infoPlistPath?: string;
 }
 
 export interface IReleaseCordovaCommand extends IReleaseBaseCommand {

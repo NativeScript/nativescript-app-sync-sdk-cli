@@ -13,6 +13,7 @@ import * as Q from "q";
 import Promise = Q.Promise;
 import * as yazl from "yazl";
 var progress = require("progress");
+var plist = require("plist");
 
 import AccountManager = require("nativescript-app-sync-sdk");
 import {Package, PackageInfo} from "nativescript-app-sync-sdk/script/types";
@@ -108,7 +109,16 @@ var coreReleaseHook: cli.ReleaseHook = (currentCommand: cli.IReleaseCommand, ori
                 .then((isAuth: boolean): Promise<Package> => {
                     return sdk.release(currentCommand.appName, currentCommand.deploymentName, packagePath, currentCommand.appStoreVersion, updateMetadata, uploadProgress);
                 })
-                .then((): void => {
+                .then((packageHash): void => {
+                    console.log("Released hash: ", packageHash)
+                    if (packageHash) {
+                        let infoPlistPath = currentCommand.infoPlistPath;
+                        let xmlData = fs.readFileSync(infoPlistPath, "utf8");
+                        let plistObj = plist.parse(xmlData);
+                        plistObj['AppSyncPackageHash'] = packageHash;
+                        fs.writeFileSync(infoPlistPath, plist.build(plistObj));
+                    }
+                    
                     log(`Successfully released an update containing the "${originalCommand.package}" `
                         + `${fs.lstatSync(originalCommand.package).isDirectory()  ? "directory" : "file"}`
                         + ` to the "${currentCommand.deploymentName}" deployment of the "${currentCommand.appName}" app.`);
