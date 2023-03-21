@@ -339,7 +339,7 @@ class AccountManager {
                         }
 
                         if (res.ok) {
-                            resolve(<Package>body.package);
+                            resolve(body.packageHash);
                         } else {
                             reject(<CodePushError>{ message: body.message, statusCode: res && res.status });
                         }
